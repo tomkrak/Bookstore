@@ -8,13 +8,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         showMenu();
         getData();
-        readFromFile("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\books.csv");
 
-//        Book book = new Book("tytul", 888,19912);
+//        Book book = new Book("tytul", 888,19912); // przykłąd tworzenia obiektu w Javie na podstawie konstruktora
 //        System.out.println(book.year);
     }
 
-    public static String readFromFile(String plik) throws IOException {
+    public static String readBook(String plik) throws IOException {     // metoda odczytu z pliku dla ksiązek
         File file = new File(plik);
         List<String> list = new ArrayList<>();
         if (file.exists()) {
@@ -31,7 +30,8 @@ public class Main {
         List<Book> books = new ArrayList<>();
         for (String line : list) {
             String[] split = line.split(";");
-            Book book = new Book(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+            String[] idAuthorSplit = split[5].split(",");
+            Book book = new Book(Integer.parseInt(split[0]), split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), split[4], Integer.parseInt(split[5]), Integer.parseInt(split[6]));
             books.add(book);
 
         }
@@ -40,23 +40,86 @@ public class Main {
 
     }
 
-    private static void getData() {             // metoda na pobranie wartości od użytkownika
+    public static String readAuthor(String plik) throws IOException {
+        File file = new File(plik);
+        List<String> list = new ArrayList<>();
+        if (file.exists()) {
+            InputStream is = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader reader = new BufferedReader(isr);
+            while (reader.ready()) {
+                list.add(reader.readLine());
+            }
+            reader.close();
+            isr.close();
+            is.close();
+        }
+        List<Author> authors = new ArrayList<>();
+        for (String line : list) {
+            String[] split = line.split(";");
+            Author author = new Author(Integer.parseInt(split[0]), split[1], Integer.parseInt(split[2]));
+            authors.add(author);
+
+        }
+        System.out.println(authors);
+        return list.toString();
+
+    }
+
+    public static String readCategory(String plik) throws IOException {
+        File file = new File(plik);
+        List<String> list = new ArrayList<>();
+        if (file.exists()) {
+            InputStream is = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader reader = new BufferedReader(isr);
+            while (reader.ready()) {
+                list.add(reader.readLine());
+            }
+            reader.close();
+            isr.close();
+            is.close();
+        }
+        List<Category> categories = new ArrayList<>();
+        for (String line : list) {
+            String[] split = line.split(";");
+            Category category = new Category(Integer.parseInt(split[0]), split[1], Integer.parseInt(split[2]));
+            categories.add(category);
+
+        }
+        System.out.println(categories);
+        return list.toString();
+
+    }
+
+    private static void getData() throws IOException {                          // metoda na pobranie wartości od użytkownika
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wybierz opcję 1 lub 2 z Menu");
+        System.out.println("Wybierz opcję z Menu");
         int liczba = scanner.nextInt();
 
-        while (liczba != 2) {
+        while (liczba != 4) {
             if (liczba == 1) {
-                System.out.println("Wyświetlam dane, dużo dużo danych");
+                readBook("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\books.csv");     // wywołanie metody
                 showMenu();
             }
-            liczba = scanner.nextInt();
+            if (liczba == 2) {
+                readAuthor("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\authors.csv");
+                showMenu();
+            }
+            if (liczba == 3) {
+               readCategory("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\categories.csv");
+                showMenu();
+            }
+
+                liczba = scanner.nextInt();
+            }
+        }
+
+        private static void showMenu () {                // metoda do wyświetlania MENU
+            System.out.println("Menu");
+            System.out.println("1. Wyświetl książki");
+            System.out.println("2. Wyświetl autorów");
+            System.out.println("3. Wyświetl kategorie");
+            System.out.println("4. Wyjdź z programu");
         }
     }
-
-    private static void showMenu() {        // metoda do wyświetlania MENU
-        System.out.println("Menu");
-        System.out.println("1. Wyświetl dane");
-        System.out.println("2. Wyjdź z programu");
-    }
-}

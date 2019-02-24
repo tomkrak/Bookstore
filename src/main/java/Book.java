@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.List;
 
 public class Book {
     int id;
@@ -6,10 +7,10 @@ public class Book {
     int isbn;
     int year;
     String cover;
-    int idAuthor;
-    int idCategory;
+    List<Author> idAuthor;
+    Category idCategory;
 
-    public Book(int id, String title, int isbn, int year, String cover, int idAuthor, int idCategory) {     // konstruktor
+    public Book(int id, String title, int isbn, int year, String cover, List<Author> idAuthor, Category idCategory) {   // konstruktor
         this.id = id;
         this.title = title;
         this.isbn = isbn;
@@ -19,7 +20,7 @@ public class Book {
         this.idCategory = idCategory;
     }
 
-    @Override                   // metoda toString powoduje, że nie wyświetla śmieci jak wyświetla obiekt (np.@234234jdsjlskdfj)
+    @Override                  // metoda toString powoduje, że nie wyświetla śmieci jak wyświetla obiekt (np.@234234jdsjlskdfj)
     public String toString() {
         return "Book{" +
                 "id=" + id +

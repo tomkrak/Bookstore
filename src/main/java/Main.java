@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    static List<Category> categories;
 
     public static void main(String[] args) throws IOException {
         showMenu();
@@ -28,10 +29,15 @@ public class Main {
             is.close();
         }
         List<Book> books = new ArrayList<>();
+        List<Category> categories = readCategory("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\categories.csv");
+
         for (String line : list) {
             String[] split = line.split(";");
             String[] idAuthorSplit = split[5].split(",");
-            Book book = new Book(Integer.parseInt(split[0]), split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), split[4], Integer.parseInt(split[5]), Integer.parseInt(split[6]));
+            int categoryId = Integer.parseInt(split[6]);
+//            int cate = categories.get(3);
+            Book book = new Book(Integer.parseInt(split[0]), split[1],
+                    Integer.parseInt(split[2]), Integer.parseInt(split[3]), split[4], null, null);
             books.add(book);
 
         }
@@ -66,7 +72,7 @@ public class Main {
 
     }
 
-    public static String readCategory(String plik) throws IOException {
+    public static List<Category> readCategory(String plik) throws IOException {
         File file = new File(plik);
         List<String> list = new ArrayList<>();
         if (file.exists()) {
@@ -88,7 +94,7 @@ public class Main {
 
         }
         System.out.println(categories);
-        return list.toString();
+        return categories;
 
     }
 
@@ -107,19 +113,19 @@ public class Main {
                 showMenu();
             }
             if (liczba == 3) {
-               readCategory("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\categories.csv");
+                List<Category> categories = readCategory("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\categories.csv");
                 showMenu();
             }
 
-                liczba = scanner.nextInt();
-            }
-        }
-
-        private static void showMenu () {                // metoda do wyświetlania MENU
-            System.out.println("Menu");
-            System.out.println("1. Wyświetl książki");
-            System.out.println("2. Wyświetl autorów");
-            System.out.println("3. Wyświetl kategorie");
-            System.out.println("4. Wyjdź z programu");
+            liczba = scanner.nextInt();
         }
     }
+
+    private static void showMenu() {                // metoda do wyświetlania MENU
+        System.out.println("Menu");
+        System.out.println("1. Wyświetl książki");
+        System.out.println("2. Wyświetl autorów");
+        System.out.println("3. Wyświetl kategorie");
+        System.out.println("4. Wyjdź z programu");
+    }
+}

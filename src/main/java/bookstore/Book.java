@@ -1,14 +1,15 @@
-import java.io.*;
+package bookstore;
+
 import java.util.List;
 
-public class Book {
-    int id;
-    String title;
-    int isbn;
-    int year;
-    String cover;
-    List<Author> idAuthor;
-    Category idCategory;
+class Book {
+    private final int id;
+    private final String title;
+    private final int isbn;
+    private final int year;
+    private final String cover;
+    private final List<Author> idAuthor;
+    private final Category idCategory;
 
     public Book(int id, String title, int isbn, int year, String cover, List<Author> idAuthor, Category idCategory) {   // konstruktor
         this.id = id;
@@ -22,7 +23,7 @@ public class Book {
 
     @Override                  // metoda toString powoduje, że nie wyświetla śmieci jak wyświetla obiekt (np.@234234jdsjlskdfj)
     public String toString() {
-        return "Book{" +
+        return "bookstore.Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isbn=" + isbn +

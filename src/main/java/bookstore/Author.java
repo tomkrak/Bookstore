@@ -1,7 +1,9 @@
-public class Author {
-    int id;
-    String name;
-    int age;
+package bookstore;
+
+class Author {
+    private final int id;
+    private final String name;
+    private final int age;
 
     public Author(int id, String name, int age) {
         this.id = id;
@@ -11,7 +13,7 @@ public class Author {
 
     @Override
     public String toString() {
-        return "Author{" +
+        return "bookstore.Author{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +

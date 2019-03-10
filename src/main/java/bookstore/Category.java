@@ -1,9 +1,9 @@
 package bookstore;
 
 class Category {
-    private final int id;
-    private final String categoryName;
-    private final int priority;
+    private int id;
+    private String categoryName;
+    private int priority;
 
     public Category(int id, String categoryName, int priority) {
         this.id = id;
@@ -18,5 +18,29 @@ class Category {
                 ", categoryName='" + categoryName + '\'' +
                 ", priority=" + priority +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

@@ -1,24 +1,22 @@
 package bookstore;
 
-import java.util.List;
-
 class Book {
     private final int id;
     private final String title;
     private final long isbn;
     private final int year;
     private final String cover;
-    private final List<Author> idAuthor;
-    private final Category idCategory;
+    private final Author Author;
+    private final Category Category;
 
-    public Book(int id, String title, long isbn, int year, String cover, List<Author> idAuthor, Category idCategory) {   // konstruktor
+    public Book(int id, String title, long isbn, int year, String cover, Author Author, Category Category) {   // konstruktor
         this.id = id;
         this.title = title;
         this.isbn = isbn;
         this.year = year;
         this.cover = cover;
-        this.idAuthor = idAuthor;
-        this.idCategory = idCategory;
+        this.Author = Author;
+        this.Category = Category;
     }
 
     @Override                  // metoda toString powoduje, że nie wyświetla śmieci jak wyświetla obiekt (np.@234234jdsjlskdfj)
@@ -29,8 +27,8 @@ class Book {
                 ", isbn=" + isbn +
                 ", year=" + year +
                 ", cover='" + cover + '\'' +
-                ", idAuthor=" + idAuthor +
-                ", idCategory=" + idCategory +
+                ", Author=" + Author +
+                ", Category=" + Category +
                 '}';
     }
 
@@ -54,12 +52,12 @@ class Book {
         return cover;
     }
 
-    public List<Author> getIdAuthor() {
-        return idAuthor;
+    public Author getAuthor() {
+        return Author;
     }
 
-    public Category getIdCategory() {
-        return idCategory;
+    public Category getCategory() {
+        return Category;
     }
 }
 

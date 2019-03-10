@@ -11,75 +11,12 @@ class Main {
     static List<Category> categories = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-        readBook("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\books.csv");
-        readAuthor("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\authors.csv");
-        readCategory("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\categories.csv");
+        ReadFromFile readFromFile = new ReadFromFile();
+        readFromFile.readAuthor("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\authors.csv");
+        readFromFile.readCategory("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\categories.csv");
+        readFromFile.readBook("C:\\Users\\Tomasz.Dorotka-VAIO\\IdeaProjects\\Bookstore\\books.csv");
         showMenu();
         getData();
-    }
-
-    private static void readBook(String fileBooks) throws IOException {
-        File file = new File(fileBooks);
-        List<String> forAdding = new ArrayList<>();
-        if (file.exists()) {
-            InputStream is = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(isr);
-            while (reader.ready()) {
-                forAdding.add(reader.readLine());
-            }
-            reader.close();
-            isr.close();
-            is.close();
-        }
-        for (String line : forAdding) {
-            String[] split = line.split(";");
-            Book book = new Book(Integer.parseInt(split[0]), split[1],
-                    Integer.parseInt(split[2]), Integer.parseInt(split[3]), split[4], null, null);
-            books.add(book);
-        }
-    }
-
-    private static void readAuthor(String fileAuthors) throws IOException {
-        File file = new File(fileAuthors);
-        List<String> forAdding = new ArrayList<>();
-        if (file.exists()) {
-            InputStream is = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(isr);
-            while (reader.ready()) {
-                forAdding.add(reader.readLine());
-            }
-            reader.close();
-            isr.close();
-            is.close();
-        }
-        for (String line : forAdding) {
-            String[] split = line.split(";");
-            Author author = new Author(Integer.parseInt(split[0]), split[1], Integer.parseInt(split[2]));
-            authors.add(author);
-        }
-    }
-
-    private static void readCategory(String fileCategories) throws IOException {
-        File file = new File(fileCategories);
-        List<String> forAdding = new ArrayList<>();
-        if (file.exists()) {
-            InputStream is = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader reader = new BufferedReader(isr);
-            while (reader.ready()) {
-                forAdding.add(reader.readLine());
-            }
-            reader.close();
-            isr.close();
-            is.close();
-        }
-        for (String line : forAdding) {
-            String[] split = line.split(";");
-            Category category = new Category(Integer.parseInt(split[0]), split[1], Integer.parseInt(split[2]));
-            categories.add(category);
-        }
     }
 
     private static void addNewAuthor() {
@@ -122,63 +59,109 @@ class Main {
 
     private static void editCategory() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wybierz, którą kategorię chcesz edytować\n1. Java\n2. Wzorce projektowe\n3. Techniki programowania");
-        int number = scanner.nextInt();
-        while (number != 3) {
-            if (number == 1) {
+        System.out.println("Wybierz, którą kategorię chcesz edytować:");
+        String g = "";
+        for (Category category : categories) {
+            g = g + category.getId() + ". " + category.getCategoryName() + "\n";
+        }
+        System.out.println(g);
+        int number = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Podaj nową nazwę kategorii");
+        String newName = scanner.nextLine();
+
+        for (Category category : categories) {
+            if (category.getId() == number) {
+                category.setCategoryName(newName);
+            }
+        }
+        System.out.println(categories);
+    }
+
+    private static List<Book> showDesignPatterns() {
+        List<Book> designPatterns = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getCategory().getCategoryName().equals("Wzorce projektowe")) {
+                designPatterns.add(book);
+            }
+        }
+        System.out.println(designPatterns);
+        return designPatterns;
+    }
+
+    private static List<Book> showAllBooksByAuthor() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wybierz autora:");
+        String h = "";
+        for (Author author : authors) {
+            h = h + author.getId() + ". " + author.getName() + "\n";
+        }
+        System.out.println(h);
+        int authorNumber = Integer.parseInt(scanner.nextLine());
+
+        List<Book> allBooksByAuthor = new ArrayList<>();
+        for (Book book : books) {
+            if(authorNumber == book.getAuthor().getId()) {
+                book.getTitle();
+                allBooksByAuthor.add(book);
+            }
+        }
+        System.out.println(allBooksByAuthor);
+        return allBooksByAuthor;
+    }
+
+    private static void getData() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("WYBIERZ OPCJĘ Z MENU:");
+        int liczba = scanner.nextInt();
+        while (liczba != 11) {
+            if (liczba == 1) {
                 System.out.println(books);
-            } else if (number == 2) {
+                showMenu();
+            } else if (liczba == 2) {
                 System.out.println(authors);
-
-                String categoryName = scanner.nextLine();
+                showMenu();
+            } else if (liczba == 3) {
+                System.out.println(categories);
+                showMenu();
+            } else if (liczba == 4) {
+                addNewAuthor();
+                showMenu();
+            } else if (liczba == 5) {
+                addNewCategory();
+                showMenu();
+            } else if (liczba == 6) {
+                saveListAuthors();
+                showMenu();
+            } else if (liczba == 7) {
+                System.out.println(BookFunctions.getBooksStartWithCPublishedAfter2007(books));
+                showMenu();
+            } else if (liczba == 8) {
+                editCategory();
+                showMenu();
+            } else if (liczba == 9) {
+                showDesignPatterns();
+                showMenu();
+            } else if (liczba == 10) {
+                showAllBooksByAuthor();
+                showMenu();
             }
+            liczba = scanner.nextInt();
         }
     }
-        private static void getData () throws IOException {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("WYBIERZ OPCJĘ Z MENU:");
-            int liczba = scanner.nextInt();
-            while (liczba != 9) {
-                if (liczba == 1) {
-                    System.out.println(books);
-                    showMenu();
-                } else if (liczba == 2) {
-                    System.out.println(authors);
-                    showMenu();
-                } else if (liczba == 3) {
-                    System.out.println(categories);
-                    showMenu();
-                } else if (liczba == 4) {
-                    addNewAuthor();
-                    showMenu();
-                } else if (liczba == 5) {
-                    addNewCategory();
-                    showMenu();
-                } else if (liczba == 6) {
-                    saveListAuthors();
-                    showMenu();
-                } else if (liczba == 7) {
-                    System.out.println(BookFunctions.getBooksStartWithCPublishedAfter2007(books));
-                    showMenu();
-                } else if (liczba == 8) {
-                    editCategory();
-                    showMenu();
-                }
-                liczba = scanner.nextInt();
-            }
-        }
 
-        private static void showMenu () {
-            System.out.println("Menu");
-            System.out.println("1. Wyświetl książki");
-            System.out.println("2. Wyświetl autorów");
-            System.out.println("3. Wyświetl kategorie");
-            System.out.println("4. Dodaj nowego autora");
-            System.out.println("5. Dodaj nową kategorię");
-            System.out.println("6. Zapisz listę autorów do pliku csv");
-            System.out.println("7. Zwróć książki, których tytuł zaczyna się od litery “C” wydane po 2007 roku");
-            System.out.println("8. Edytuj nazwę kategorii");
-            System.out.println("9. Wyjdź z programu");
-
-        }
+    private static void showMenu() {
+        System.out.println("M-E-N-U");
+        System.out.println("1. Wyświetl książki");
+        System.out.println("2. Wyświetl autorów");
+        System.out.println("3. Wyświetl kategorie");
+        System.out.println("4. Dodaj nowego autora");
+        System.out.println("5. Dodaj nową kategorię");
+        System.out.println("6. Zapisz listę autorów do pliku csv");
+        System.out.println("7. Zwróć książki, których tytuł zaczyna się od litery “C” wydane po 2007 roku");
+        System.out.println("8. Edytuj nazwę kategorii");
+        System.out.println("9. Wyświetl wszystkie książki z kategorii Wzorce projektowe");
+        System.out.println("10. Wyświetl wszystkie książki wybranego autora");
+        System.out.println("11. Wyjdź z programu");
     }
+}

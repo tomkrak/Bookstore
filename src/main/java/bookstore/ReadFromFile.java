@@ -1,7 +1,9 @@
 package bookstore;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import static bookstore.Main.*;
 
 public class ReadFromFile {

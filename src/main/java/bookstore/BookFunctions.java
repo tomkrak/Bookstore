@@ -1,8 +1,6 @@
 package bookstore;
 
-import java.time.Year;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -167,6 +165,10 @@ public class BookFunctions {
     public Map<Integer, Book> addMapWithIsbnAndValue() {
         return null;
     }
+
+    // 14. Posortuj książki po roku wydania zaczynając od wydanej najpóźniej.
+    // 15. Posortuj książki po roku wydania zaczynając od wydanej najwcześniej.
+    // 16. Podziel listę książek na 3 listy po 2 książki i zwróć z metody.
 
 }
 

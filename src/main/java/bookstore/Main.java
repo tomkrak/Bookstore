@@ -1,6 +1,9 @@
 package bookstore;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +36,7 @@ class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nową kategorię");
         String categoryName = scanner.nextLine();
-        categories.add(new Category(1, categoryName, 1));
+        categories.add(new Category(categories.get(2).getId() + 1, categoryName, 1));
         System.out.println("Nowa kategoria została dodana");
     }
 
@@ -101,7 +104,7 @@ class Main {
 
         List<Book> allBooksByAuthor = new ArrayList<>();
         for (Book book : books) {
-            if(authorNumber == book.getAuthor().getId()) {
+            if (authorNumber == book.getAuthor().getId()) {
                 book.getTitle();
                 allBooksByAuthor.add(book);
             }
@@ -110,43 +113,43 @@ class Main {
         return allBooksByAuthor;
     }
 
-    private static void getData() throws IOException {
+    private static void getData() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("WYBIERZ OPCJĘ Z MENU:");
-        int liczba = scanner.nextInt();
-        while (liczba != 11) {
-            if (liczba == 1) {
+        int userNumber = scanner.nextInt();
+        while (userNumber != 11) {
+            if (userNumber == 1) {
                 System.out.println(books);
                 showMenu();
-            } else if (liczba == 2) {
+            } else if (userNumber == 2) {
                 System.out.println(authors);
                 showMenu();
-            } else if (liczba == 3) {
+            } else if (userNumber == 3) {
                 System.out.println(categories);
                 showMenu();
-            } else if (liczba == 4) {
+            } else if (userNumber == 4) {
                 addNewAuthor();
                 showMenu();
-            } else if (liczba == 5) {
+            } else if (userNumber == 5) {
                 addNewCategory();
                 showMenu();
-            } else if (liczba == 6) {
+            } else if (userNumber == 6) {
                 saveListAuthors();
                 showMenu();
-            } else if (liczba == 7) {
+            } else if (userNumber == 7) {
                 System.out.println(BookFunctions.getBooksStartWithCPublishedAfter2007(books));
                 showMenu();
-            } else if (liczba == 8) {
+            } else if (userNumber == 8) {
                 editCategory();
                 showMenu();
-            } else if (liczba == 9) {
+            } else if (userNumber == 9) {
                 showDesignPatterns();
                 showMenu();
-            } else if (liczba == 10) {
+            } else if (userNumber == 10) {
                 showAllBooksByAuthor();
                 showMenu();
             }
-            liczba = scanner.nextInt();
+            userNumber = scanner.nextInt();
         }
     }
 

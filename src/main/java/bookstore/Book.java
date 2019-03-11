@@ -19,7 +19,8 @@ class Book {
         this.Category = Category;
     }
 
-    @Override                  // metoda toString powoduje, że nie wyświetla śmieci jak wyświetla obiekt (np.@234234jdsjlskdfj)
+    @Override
+    // metoda toString powoduje, że nie wyświetla śmieci jak wyświetla obiekt (np.@234234jdsjlskdfj)
     public String toString() {
         return "bookstore.Book{" +
                 "id=" + id +

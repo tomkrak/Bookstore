@@ -11,7 +11,7 @@ public class BookFunctions {
     // 1. Znajdź książkę o podanym ISBN. Metoda przyjmuje 2 parametry (isbn, lista wszystkich książek) i zwraca podaną książkę
     public Book searchByIsbn(long isbn, List<Book> allBooks) {
         for (Book book : allBooks) {
-            if (book.getIsbn() == 9780596150211L) {
+            if (book.getIsbn() == 9780596150211L) {     // TODO: Dlaczego tutaj mamy na sztywno wpisany numer?
                 return book;
             }
         }
@@ -22,7 +22,7 @@ public class BookFunctions {
     public Book searchByIsbnStream(long isbn, List<Book> allBooks) {
         return allBooks.
                 stream().
-                filter(book -> book.getIsbn() == 9780596150211L).
+                filter(book -> book.getIsbn() == 9780596150211L).   // TODO
                 findFirst().
                 orElse(null);
     }
@@ -52,11 +52,11 @@ public class BookFunctions {
 
     // 5. Zwróć sumę lat wydania wszystkich książek
     public int sumAllYears(List<Book> allBooks) {
-        int i = 0;
+        int addedYears = 0;
         for (Book book : allBooks) {
-            i += book.getYear();
+            addedYears += book.getYear();
         }
-        return i;
+        return addedYears;
     }
 
     // 5A.Stream. Zwróć sumę lat wydania wszystkich książek
@@ -66,13 +66,13 @@ public class BookFunctions {
 
     // 6. Zwróć liczbę książek wydanych po 2007 roku
     public int getBooksPublishedAfter2007(List<Book> allBooks) {
-        int i = 0;
+        int booksAfter2007 = 0;
         for (Book book : allBooks) {
             if (book.getYear() > 2007) {
-                i += 1;
+                booksAfter2007 += 1;
             }
         }
-        return i;
+        return booksAfter2007;
     }
 
     // 6A.Stream. Zwróć liczbę książek wydanych po 2007 roku
@@ -82,52 +82,50 @@ public class BookFunctions {
 
     // 7. Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku
     public boolean areBooksPublishedAfter2000(List<Book> allBooks) {
-        boolean b = true;
+        boolean booksAfter2000 = true;
         for (Book book : allBooks) {
             if (book.getYear() <= 2000) {
-                b = false;
+                booksAfter2000 = false;
             }
         }
-        return b;
+        return booksAfter2000;
     }
 
     // 7A.Stream. Zwróć informacje o tym czy wszystkie książki w naszym katalogu są wydane po 2000 roku
     public boolean areBooksPublishedAfter2000Stream(List<Book> allBooks) {
         long count = allBooks.stream().filter(book -> book.getYear() <= 2000).count();
-        boolean result = allBooks.size() != count;
-        return result;
+        return allBooks.size() != count;
     }
 
     // 8. Zwróć średni rok wydania książki w naszym katalogu
     public int getYearMediana(List<Book> allBooks) {
-        int i = 0;
+        int sumOfYears = 0;
         for (Book book : allBooks) {
-            i += book.getYear();
+            sumOfYears += book.getYear();
         }
-        return i / allBooks.size();
+        return sumOfYears / allBooks.size();
     }
 
     // 8A.Stream. Zwróć średni rok wydania książki w naszym katalogu
     public int getYearMedianaStream(List<Book> allBooks) {
-        int i = allBooks.stream().mapToInt(book -> book.getYear()).sum();
-        return i / allBooks.size();
+        int sumOfYears = allBooks.stream().mapToInt(book -> book.getYear()).sum();
+        return sumOfYears / allBooks.size();
     }
 
     // 9. Zwróć informacje o tym czy jakakolwiek książka w naszym katalogu jest wydana przed 2003 rokiem
     public boolean isAnyPublishedBefore2003(List<Book> allBooks) {
-        boolean b = false;
+        boolean statement = false;
         for (Book book : allBooks) {
             if (book.getYear() < 2003) {
-                b = true;
+                statement = true;
             }
         }
-        return b;
+        return statement;
     }
 
     // 9. Zwróć informacje o tym czy jakakolwiek książka w naszym katalogu jest wydana przed 2003 rokiem
     public boolean isAnyPublishedBefore2003Stream(List<Book> allBooks) {
-        boolean areThereBefore2003 = allBooks.stream().anyMatch(book -> book.getYear() < 2003);
-        return areThereBefore2003;
+        return allBooks.stream().anyMatch(book -> book.getYear() < 2003);
     }
 
     // 10. Zwróć wszystkie książki, których tytuł zaczyna się od litery “C” i były one wydane po 2007 roku
@@ -143,9 +141,8 @@ public class BookFunctions {
 
     // 11. Dodajmy 100 lat do daty wydania każdej książki (tak, wiem że to nie ma sensu)        // TODO
     public List<Book> add100Years(List<Book> allBooks) {
-        int i = 0;
         for (Book book : allBooks) {
-            i = book.getYear() + 100;
+            book.getYear() += 100;
         }
         return allBooks;
     }
@@ -166,9 +163,11 @@ public class BookFunctions {
         return null;
     }
 
-    // 14. Posortuj książki po roku wydania zaczynając od wydanej najpóźniej.
-    // 15. Posortuj książki po roku wydania zaczynając od wydanej najwcześniej.
-    // 16. Podziel listę książek na 3 listy po 2 książki i zwróć z metody.
+    // 14. Posortuj książki po roku wydania zaczynając od wydanej najpóźniej.   // TODO
+
+    // 15. Posortuj książki po roku wydania zaczynając od wydanej najwcześniej. // TODO
+
+    // 16. Podziel listę książek na 3 listy po 2 książki i zwróć z metody.      // TODO
 
 }
 

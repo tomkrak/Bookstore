@@ -6,17 +6,17 @@ class Book {
     private final long isbn;
     private final int year;
     private final String cover;
-    private final Author Author;
-    private final Category Category;
+    private final Author author;
+    private final Category category;
 
-    public Book(int id, String title, long isbn, int year, String cover, Author Author, Category Category) {   // konstruktor
+    public Book(int id, String title, long isbn, int year, String cover, Author author, Category category) {    // konstruktor
         this.id = id;
         this.title = title;
         this.isbn = isbn;
         this.year = year;
         this.cover = cover;
-        this.Author = Author;
-        this.Category = Category;
+        this.author = author;
+        this.category = category;
     }
 
     @Override
@@ -28,8 +28,8 @@ class Book {
                 ", isbn=" + isbn +
                 ", year=" + year +
                 ", cover='" + cover + '\'' +
-                ", Author=" + Author +
-                ", Category=" + Category +
+                ", author=" + author +
+                ", category=" + category +
                 '}';
     }
 
@@ -54,11 +54,11 @@ class Book {
     }
 
     public Author getAuthor() {
-        return Author;
+        return author;
     }
 
     public Category getCategory() {
-        return Category;
+        return category;
     }
 }
 

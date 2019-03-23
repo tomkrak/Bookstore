@@ -94,14 +94,14 @@ public class BookFunctionsTest {
 
     @Test
     public void areBooksPublishedAfter2000() {
-        boolean trueOrFalse = bookFunctions.areBooksPublishedAfter2000(testedBooks);
-        Assert.assertEquals(true, trueOrFalse);
+        boolean isPublishedAfter2000 = bookFunctions.areBooksPublishedAfter2000(testedBooks);
+        Assert.assertTrue(isPublishedAfter2000);
     }
 
     @Test
     public void areBooksPublishedAfter2000Stream() {
-        boolean trueOrFalse = bookFunctions.areBooksPublishedAfter2000Stream(testedBooks);
-        Assert.assertEquals(true, trueOrFalse);
+        boolean isPublishedAfter2000 = bookFunctions.areBooksPublishedAfter2000Stream(testedBooks);
+        Assert.assertTrue(isPublishedAfter2000);
     }
 
     @Test
@@ -118,14 +118,14 @@ public class BookFunctionsTest {
 
     @Test
     public void isAnyPublishedBefore2003() {
-        boolean trueOrFalse = bookFunctions.isAnyPublishedBefore2003(testedBooks);
-        Assert.assertEquals(false, trueOrFalse);
+        boolean isPublishedBefore2003 = bookFunctions.isAnyPublishedBefore2003(testedBooks);
+        Assert.assertTrue(isPublishedBefore2003);
     }
 
     @Test
     public void isAnyPublishedBefore2003Stream() {
-        boolean trueOrFalse = bookFunctions.isAnyPublishedBefore2003Stream(testedBooks);
-        Assert.assertEquals(false, trueOrFalse);
+        boolean isPublishedBefore2003 = bookFunctions.isAnyPublishedBefore2003Stream(testedBooks);
+        Assert.assertTrue(isPublishedBefore2003);
     }
 
     @Test

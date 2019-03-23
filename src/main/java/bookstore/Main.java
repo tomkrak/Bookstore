@@ -28,7 +28,7 @@ class Main {
         String authorName = scanner.nextLine();
         System.out.println("Podaj wiek autora");
         int authorAge = scanner.nextInt();
-        authors.add(new Author(authors.get(7).getId() + 1, authorName, authorAge));
+        authors.add(new Author(authors.get(7).getId() + 1, authorName, authorAge));     // TODO
         System.out.println("Nowy autor został dodany");
     }
 
@@ -36,38 +36,18 @@ class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nową kategorię");
         String categoryName = scanner.nextLine();
-        categories.add(new Category(categories.get(2).getId() + 1, categoryName, 1));
+        categories.add(new Category(categories.get(2).getId() + 1, categoryName, 1));       // TODO
         System.out.println("Nowa kategoria została dodana");
-    }
-
-    private static void saveListAuthors() {
-        try (PrintWriter writer = new PrintWriter(new File("authorslist.csv"))) {
-
-            for (Author author : authors) {
-                StringBuilder build = new StringBuilder();
-                build.append(author.getId());
-                build.append(';');
-                build.append(author.getName());
-                build.append(';');
-                build.append(author.getAge());
-                build.append('\n');
-                writer.write(build.toString());
-            }
-            System.out.println("Plik *autorslist.csv* został zapisany");
-
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     private static void editCategory() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz, którą kategorię chcesz edytować:");
-        String g = "";
+        String categoryToFulfit = "";
         for (Category category : categories) {
-            g = g + category.getId() + ". " + category.getCategoryName() + "\n";
+            categoryToFulfit += category.getId() + ". " + category.getCategoryName() + "\n";
         }
-        System.out.println(g);
+        System.out.println(categoryToFulfit);
         int number = Integer.parseInt(scanner.nextLine());
 
         System.out.println("Podaj nową nazwę kategorii");
@@ -81,7 +61,7 @@ class Main {
         System.out.println(categories);
     }
 
-    private static List<Book> showDesignPatterns() {
+    private static void showDesignPatterns() {
         List<Book> designPatterns = new ArrayList<>();
         for (Book book : books) {
             if (book.getCategory().getCategoryName().equals("Wzorce projektowe")) {
@@ -89,23 +69,21 @@ class Main {
             }
         }
         System.out.println(designPatterns);
-        return designPatterns;
     }
 
     private static List<Book> showAllBooksByAuthor() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz autora:");
-        String h = "";
+        String authorToFulfit = "";
         for (Author author : authors) {
-            h = h + author.getId() + ". " + author.getName() + "\n";
+            authorToFulfit += author.getId() + ". " + author.getName() + "\n";
         }
-        System.out.println(h);
+        System.out.println(authorToFulfit);
         int authorNumber = Integer.parseInt(scanner.nextLine());
 
         List<Book> allBooksByAuthor = new ArrayList<>();
         for (Book book : books) {
             if (authorNumber == book.getAuthor().getId()) {
-                book.getTitle();
                 allBooksByAuthor.add(book);
             }
         }
@@ -117,41 +95,67 @@ class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("WYBIERZ OPCJĘ Z MENU:");
         int userNumber = scanner.nextInt();
-        while (userNumber != 11) {
-            if (userNumber == 1) {
+        switch (userNumber) {
+            case 1:
                 System.out.println(books);
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 2) {
+                break;
+            case 2:
                 System.out.println(authors);
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 3) {
+                break;
+            case 3:
                 System.out.println(categories);
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 4) {
+                break;
+            case 4:
                 addNewAuthor();
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 5) {
+                break;
+            case 5:
                 addNewCategory();
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 6) {
-                saveListAuthors();
+                break;
+            case 6:
+                SaveToFile.saveListAuthors();
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 7) {
+                break;
+            case 7:
                 System.out.println(BookFunctions.getBooksStartWithCPublishedAfter2007(books));
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 8) {
+                break;
+            case 8:
                 editCategory();
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 9) {
+                break;
+            case 9:
                 showDesignPatterns();
+                System.out.println();
                 showMenu();
-            } else if (userNumber == 10) {
+                break;
+            case 10:
                 showAllBooksByAuthor();
+                System.out.println();
                 showMenu();
-            }
-            userNumber = scanner.nextInt();
+                break;
+            case 11:
+                System.out.println("Wychodzę z programu");
+                break;
+            default:
+                showMenu();
+                break;
         }
+        getData();
     }
+
 
     private static void showMenu() {
         System.out.println("M-E-N-U");

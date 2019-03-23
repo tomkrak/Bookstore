@@ -12,18 +12,12 @@ public class BookFunctionsTest {
 
     @Before
     public void setup() {
-        Book book1 = new Book(1, "Java in a nutshell", 9780596150211L, 2014, "paperback", null, null);
-        Book book2 = new Book(2, "Advanced Programming Techniques", 9780983384021L, 2011, "hardcover", null, null);
-        Book book3 = new Book(3, "Design Patterns in Java", 9780134277882L, 2006, "paperback", null, null);
-        Book book4 = new Book(4, "Java: The Complete Reference", 9781260440232L, 2018, "hardcover", null, null);
-        Book book5 = new Book(5, "Java: A Beginner's Guide", 9781260440218L, 2018, "paperback", null, null);
-        Book book6 = new Book(6, "Head First Design Patterns", 9780596007126L, 2004, "paperback", null, null);
-        testedBooks.add(book1);
-        testedBooks.add(book2);
-        testedBooks.add(book3);
-        testedBooks.add(book4);
-        testedBooks.add(book5);
-        testedBooks.add(book6);
+        testedBooks.add(new Book(1, "Java in a nutshell", 9780596150211L, 2014, "paperback", null, null));
+        testedBooks.add(new Book(2, "Advanced Programming Techniques", 9780983384021L, 2011, "hardcover", null, null));
+        testedBooks.add(new Book(3, "Design Patterns in Java", 9780134277882L, 2006, "paperback", null, null));
+        testedBooks.add(new Book(4, "Java: The Complete Reference", 9781260440232L, 2018, "hardcover", null, null));
+        testedBooks.add(new Book(5, "Java: A Beginner's Guide", 9781260440218L, 2018, "paperback", null, null));
+        testedBooks.add(new Book(6, "Head First Design Patterns", 9780596007126L, 2004, "paperback", null, null));
     }
 
     private BookFunctions bookFunctions = new BookFunctions();
@@ -159,5 +153,4 @@ public class BookFunctionsTest {
 //        Map<Integer, Book> secondSample = mapWithIsbnAndValue.get(9780983384021L, book2);
 //        Assert.assertEquals(Map<9780596150211L, book1>, );
 //    }
-
 }

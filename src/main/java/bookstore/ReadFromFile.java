@@ -8,8 +8,8 @@ import static bookstore.Main.*;
 
 public class ReadFromFile {
 
-    public void readBook(String fileBooks) throws IOException {
-        File file = new File(fileBooks);
+    public void readBook(String filePathBooks) throws IOException {
+        File file = new File(filePathBooks);
         List<String> forAdding = new ArrayList<>();
         if (file.exists()) {
             InputStream is = new FileInputStream(file);
@@ -42,8 +42,8 @@ public class ReadFromFile {
         }
     }
 
-    public void readAuthor(String fileAuthors) throws IOException {
-        File file = new File(fileAuthors);
+    public void readAuthor(String filePathAuthors) throws IOException {
+        File file = new File(filePathAuthors);
         List<String> forAdding = new ArrayList<>();
         if (file.exists()) {
             InputStream is = new FileInputStream(file);
@@ -63,8 +63,8 @@ public class ReadFromFile {
         }
     }
 
-    public void readCategory(String fileCategories) throws IOException {
-        File file = new File(fileCategories);
+    public void readCategory(String filePathCategories) throws IOException {
+        File file = new File(filePathCategories);
         List<String> forAdding = new ArrayList<>();
         if (file.exists()) {
             InputStream is = new FileInputStream(file);

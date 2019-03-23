@@ -11,7 +11,7 @@ public class BookFunctions {
     // 1. Znajdź książkę o podanym ISBN. Metoda przyjmuje 2 parametry (isbn, lista wszystkich książek) i zwraca podaną książkę
     public Book searchByIsbn(long isbn, List<Book> allBooks) {
         for (Book book : allBooks) {
-            if (book.getIsbn() == 9780596150211L) {     // TODO: Dlaczego tutaj mamy na sztywno wpisany numer?
+            if (book.getIsbn() == isbn) {
                 return book;
             }
         }
@@ -22,7 +22,7 @@ public class BookFunctions {
     public Book searchByIsbnStream(long isbn, List<Book> allBooks) {
         return allBooks.
                 stream().
-                filter(book -> book.getIsbn() == 9780596150211L).   // TODO
+                filter(book -> book.getIsbn() == isbn).
                 findFirst().
                 orElse(null);
     }
@@ -129,7 +129,7 @@ public class BookFunctions {
     }
 
     // 10. Zwróć wszystkie książki, których tytuł zaczyna się od litery “C” i były one wydane po 2007 roku
-    public static List<Book> getBooksStartWithCPublishedAfter2007(List<Book> allBooks) {
+    public List<Book> getBooksStartWithCPublishedAfter2007(List<Book> allBooks) {
         List<Book> startWithC = new ArrayList<>();
         for (Book book : allBooks) {
             if ((book.getTitle().startsWith("C")) && ((book.getYear() > 2007))) {
@@ -139,10 +139,10 @@ public class BookFunctions {
         return startWithC;
     }
 
-    // 11. Dodajmy 100 lat do daty wydania każdej książki (tak, wiem że to nie ma sensu)        // TODO
+    // 11. Dodajmy 100 lat do daty wydania każdej książki (tak, wiem że to nie ma sensu)
     public List<Book> add100Years(List<Book> allBooks) {
         for (Book book : allBooks) {
-            book.getYear() += 100;
+            book.setYear(book.getYear() + 100);
         }
         return allBooks;
     }
@@ -158,7 +158,7 @@ public class BookFunctions {
         return booksDevidedByTwo;
     }
 
-    // 13. Zwróć mapę, która będzie miała klucz isbn i wartość obiekt Book (Map<String, Book>)
+    // 13. Zwróć mapę, która będzie miała klucz isbn i wartość obiekt Book (Map<String, Book>)  // TODO
     public Map<Integer, Book> addMapWithIsbnAndValue() {
         return null;
     }
@@ -170,14 +170,3 @@ public class BookFunctions {
     // 16. Podziel listę książek na 3 listy po 2 książki i zwróć z metody.      // TODO
 
 }
-
-
-
-
-
-
-
-
-
-
-

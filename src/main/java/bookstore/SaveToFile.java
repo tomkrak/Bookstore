@@ -23,8 +23,8 @@ public class SaveToFile {
             }
             System.out.println("Plik *autorslist.csv* został zapisany");
 
-        } catch (FileNotFoundException e) {         // TODO
-            System.out.println(e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException: the given file object does not denote an existing, writable regular file");
         }
     }
 }

@@ -1,9 +1,6 @@
 package bookstore;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +9,8 @@ class Main {
     static List<Book> books = new ArrayList<>();
     static List<Author> authors = new ArrayList<>();
     static List<Category> categories = new ArrayList<>();
+    static BookFunctions bookFunctions = new BookFunctions();
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
         ReadFromFile readFromFile = new ReadFromFile();
@@ -23,25 +22,43 @@ class Main {
     }
 
     private static void addNewAuthor() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imię i nazwisko autora");
         String authorName = scanner.nextLine();
         System.out.println("Podaj wiek autora");
-        int authorAge = scanner.nextInt();
-        authors.add(new Author(authors.get(7).getId() + 1, authorName, authorAge));     // TODO
+        int authorAge = Integer.parseInt(scanner.nextLine());
+        int lastAuthorIndex = getMaxAuthorIndex(authors);
+        authors.add(new Author(lastAuthorIndex + 1, authorName, authorAge));
         System.out.println("Nowy autor został dodany");
     }
 
+    private static int getMaxAuthorIndex(List<Author> authors) {
+        int id = 0;
+        for (Author author : authors) {
+            if (author.getId() > id) ;
+            id = author.getId();
+        }
+        return id;
+    }
+
     private static void addNewCategory() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj nową kategorię");
         String categoryName = scanner.nextLine();
-        categories.add(new Category(categories.get(2).getId() + 1, categoryName, 1));       // TODO
+        int lastCategoryIndex = getMaxCategoryIndex(categories);
+        categories.add(new Category(lastCategoryIndex + 1, categoryName, 1));
         System.out.println("Nowa kategoria została dodana");
     }
 
+    private static int getMaxCategoryIndex(List<Category> categories) {
+        int id = 0;
+        for (Category category : categories) {
+            if (category.getId() > id) {
+                id = category.getId();
+            }
+        }
+        return id;
+    }
+
     private static void editCategory() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz, którą kategorię chcesz edytować:");
         String categoryToFulfit = "";
         for (Category category : categories) {
@@ -72,7 +89,6 @@ class Main {
     }
 
     private static List<Book> showAllBooksByAuthor() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Wybierz autora:");
         String authorToFulfit = "";
         for (Author author : authors) {
@@ -92,9 +108,8 @@ class Main {
     }
 
     private static void getData() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("WYBIERZ OPCJĘ Z MENU:");
-        int userNumber = scanner.nextInt();
+        int userNumber = Integer.parseInt(scanner.nextLine());
         switch (userNumber) {
             case 1:
                 System.out.println(books);
@@ -127,7 +142,7 @@ class Main {
                 showMenu();
                 break;
             case 7:
-                System.out.println(BookFunctions.getBooksStartWithCPublishedAfter2007(books));
+                System.out.println(bookFunctions.getBooksStartWithCPublishedAfter2007(books));
                 System.out.println();
                 showMenu();
                 break;
@@ -155,7 +170,6 @@ class Main {
         }
         getData();
     }
-
 
     private static void showMenu() {
         System.out.println("M-E-N-U");

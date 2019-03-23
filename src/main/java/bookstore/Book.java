@@ -4,7 +4,7 @@ class Book {
     private final int id;
     private final String title;
     private final long isbn;
-    private final int year;
+    private int year;
     private final String cover;
     private final Author author;
     private final Category category;
@@ -60,5 +60,8 @@ class Book {
     public Category getCategory() {
         return category;
     }
-}
 
+    public void setYear(int year) {
+        this.year = year;
+    }
+}
